@@ -1,30 +1,27 @@
-# Getting Started with Create React App
+## This is only a simulation...
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is intended to simulate a chat like application
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+Download, clone or fork the project and then navigate into the root folder of the project with a terminal
 
-### `npm start`
+### Install dependencies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### type `npm i` or `npm install` in your terminal within the root of the application
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Installing might take some time, progress will be displayed in the terminal
 
-### `npm test`
+### Run project locally
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### type `npm start` or `npm run start` to run locally
 
-### `npm run build`
+Runs the app in the development mode
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Build project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### type `npm run build` to compile for production
+
+Builds the app for production to the `build` folder
