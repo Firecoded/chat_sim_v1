@@ -1,15 +1,31 @@
+import { useState } from "react";
+
 interface IChatInputProps {
     temp?: string;
     onSubmit: (value: string) => void;
 }
 
-export const ChatInput = (props: IChatInputProps): JSX.Element => {
+export const ChatInput = ({ onSubmit }: IChatInputProps): JSX.Element => {
+    const [inputValue, setInputValue] = useState("");
     return (
-        <form>
+        <form
+            onSubmit={(e) => {
+                e.preventDefault();
+                onSubmit(inputValue.trim());
+                setInputValue("");
+            }}
+        >
             <div className="input-group">
-                <textarea className="form-control" aria-label="With textarea"></textarea>
+                <textarea
+                    className="form-control"
+                    aria-label="Chat Text Area"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                ></textarea>
                 <div className="input-group-append">
-                    <span className="input-group-text">Chat</span>
+                    <button className="input-group-text" type="submit">
+                        Chat
+                    </button>
                 </div>
             </div>
         </form>

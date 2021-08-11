@@ -30,6 +30,46 @@ body {
     }
 }
 
+.chat-bubble {
+    position: relative;
+    background: #fff;
+    @include rounded-corners-all;
+    padding: 24px;
+    text-align: center;
+    color: #000;
+    &.bubble-origin-left:before {
+        content: "";
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        border-left: 12px solid #fff;
+        border-right: 6px solid transparent;
+        border-top: 6px solid #fff;
+        border-bottom: 10px solid transparent;
+        left: 32px;
+        bottom: -16px;
+    }
+    &.bubble-origin-right:before {
+        content: "";
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        border-right: 12px solid #fff;
+        border-left: 6px solid transparent;
+        border-top: 6px solid #fff;
+        border-bottom: 10px solid transparent;
+        right: 32px;
+        bottom: -16px;
+    }
+}
+
+.chat-bubble-user-icon {
+    height: 30px;
+    width: 30px;
+    @include rounded-corners-all;
+    background-color: $blueLight;
+}
+
 /* Util */
 
 .rounded-corners-all {
@@ -39,4 +79,8 @@ body {
 .rounded-corners-top {
     @include rounded-corners-top-left;
     @include rounded-corners-top-right;
+}
+
+.overflow-auto {
+    overflow: auto;
 }

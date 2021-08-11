@@ -1,20 +1,15 @@
 import { IChatLogEntry, IChatUser } from "../controllers/chatSimContainer";
-import { ChatInput } from "./chatInput";
+import { ChatBubbles } from "./chatBubbles";
 
 interface IChatContainerProps extends IChatUser {
     chatLogs: IChatLogEntry[];
-    handleChatSubmit: (chatEntry: IChatLogEntry) => void;
 }
 
-export const ChatContainer = ({ handleChatSubmit, chatUserId, chatUserName }: IChatContainerProps): JSX.Element => {
-    const onSubmit = (value: string) => {
-        handleChatSubmit({ chatUserId, chatUserName, chatLogContent: value });
-    };
+export const ChatContainer = ({ chatUserId, chatUserName, chatLogs }: IChatContainerProps): JSX.Element => {
     return (
         <div className="chat-container d-flex flex-column h-100">
-            <div className="chat-logs flex-fill"></div>
-            <div className="chat-input-container">
-                <ChatInput onSubmit={onSubmit} />
+            <div className="chat-logs flex-fill">
+                <ChatBubbles chatLogs={chatLogs} chatUserId={chatUserId} chatUserName={chatUserName} />
             </div>
         </div>
     );

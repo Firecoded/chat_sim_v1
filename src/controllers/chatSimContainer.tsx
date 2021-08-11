@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChatContainer } from "../components/chatContainer";
+import { ChatInput } from "../components/chatInput";
 import { ChatToggle } from "../components/chatToggle";
 
 export interface IChatLogEntry {
@@ -15,6 +16,46 @@ export interface IChatUser {
 }
 
 const MOCK_CHAT_LOGS: IChatLogEntry[] = [
+    {
+        chatUserId: 0,
+        chatUserName: "Jim",
+        chatLogContent: "Hey There!",
+    },
+    {
+        chatUserId: 1,
+        chatUserName: "Pam",
+        chatLogContent: "Hey Jim!",
+    },
+    {
+        chatUserId: 0,
+        chatUserName: "Jim",
+        chatLogContent: "Hey There!",
+    },
+    {
+        chatUserId: 1,
+        chatUserName: "Pam",
+        chatLogContent: "Hey Jim!",
+    },
+    {
+        chatUserId: 0,
+        chatUserName: "Jim",
+        chatLogContent: "Hey There!",
+    },
+    {
+        chatUserId: 1,
+        chatUserName: "Pam",
+        chatLogContent: "Hey Jim!",
+    },
+    {
+        chatUserId: 0,
+        chatUserName: "Jim",
+        chatLogContent: "Hey There!",
+    },
+    {
+        chatUserId: 1,
+        chatUserName: "Pam",
+        chatLogContent: "Hey Jim!",
+    },
     {
         chatUserId: 0,
         chatUserName: "Jim",
@@ -44,6 +85,7 @@ export const ChatSimContainer = (): JSX.Element => {
     const handleChatSubmit = (chatEntry: IChatLogEntry) => {
         setChatLogs([...chatLogs, chatEntry]);
     };
+
     return (
         <div className="chat-sim-container container-fluid h-100 rounded-corners-all d-flex flex-column">
             <div className="row d-md-none">
@@ -55,12 +97,32 @@ export const ChatSimContainer = (): JSX.Element => {
                     />
                 </div>
             </div>
-            <div className="row flex-fill">
+            <div className="row flex-fill overflow-auto">
                 <div className={`mb-2 col-md-6 col-sm-12 ${activeChatLog === 1 ? "d-none d-md-block" : ""}`}>
-                    <ChatContainer {...chatUsers[0]} chatLogs={chatLogs} handleChatSubmit={handleChatSubmit} />
+                    <ChatContainer {...chatUsers[0]} chatLogs={chatLogs} />
                 </div>
                 <div className={`mb-2 col-md-6 col-sm-12 ${activeChatLog === 0 ? "d-none d-md-block" : ""}`}>
-                    <ChatContainer {...chatUsers[1]} chatLogs={chatLogs} handleChatSubmit={handleChatSubmit} />
+                    <ChatContainer {...chatUsers[1]} chatLogs={chatLogs} />
+                </div>
+            </div>
+            <div className="row">
+                <div className={`mb-2 col-md-6 col-sm-12 ${activeChatLog === 1 ? "d-none d-md-block" : ""}`}>
+                    <div className="chat-input-container p-3">
+                        <ChatInput
+                            onSubmit={(inputValue: string) =>
+                                handleChatSubmit({ ...chatUsers[0], chatLogContent: inputValue })
+                            }
+                        />
+                    </div>
+                </div>
+                <div className={`mb-2 col-md-6 col-sm-12 ${activeChatLog === 0 ? "d-none d-md-block" : ""}`}>
+                    <div className="chat-input-container p-3">
+                        <ChatInput
+                            onSubmit={(inputValue: string) =>
+                                handleChatSubmit({ ...chatUsers[1], chatLogContent: inputValue })
+                            }
+                        />
+                    </div>
                 </div>
             </div>
         </div>
