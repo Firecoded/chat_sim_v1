@@ -29,7 +29,7 @@ export const ChatSimContainer = (): JSX.Element => {
         },
     ]);
     const [activeChatLog, setActiveChatLog] = useState(0);
-    const [chatUsers, setChatUsers] = useState<IChatUser[]>([
+    const chatUsers = [
         {
             chatUserId: 0,
             chatUserName: "Jim",
@@ -38,7 +38,7 @@ export const ChatSimContainer = (): JSX.Element => {
             chatUserId: 1,
             chatUserName: "Pam",
         },
-    ]);
+    ];
 
     return (
         <div className="shadow chat-sim-container container-fluid h-100 rounded-corners-all d-flex flex-column">

@@ -25,3 +25,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser
 #### type `npm run build` to compile for production
 
 Builds the app for production to the `build` folder
+
+## Demo
+
+[chat-sim.netlify.app](chat-sim.netlify.app)
