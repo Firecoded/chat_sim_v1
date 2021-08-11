@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import { IChatUser, IChatLogEntry } from "../controllers/chatSimContainer";
 
 interface IChatBubblesProps extends IChatUser {
@@ -5,23 +6,59 @@ interface IChatBubblesProps extends IChatUser {
 }
 
 export const ChatBubbles = ({ chatUserId, chatLogs }: IChatBubblesProps): JSX.Element => {
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [chatLogs]);
+
+    const addGutter = (addGutter: boolean) => {
+        if (addGutter) {
+            return <div className="col-md-2 d-sm-none d-md-block"></div>;
+        }
+    };
+
+    const addUserIcon = (addIcon: boolean, leftBubble: boolean, initial: string) => {
+        if (addIcon) {
+            return (
+                <div className={`col-12 d-flex justify-content-${leftBubble ? "start" : "end"}`}>
+                    <div
+                        className={`${
+                            leftBubble ? "left" : "right"
+                        }-user-bubble shadow chat-bubble-user-icon d-flex align-items-center justify-content-center`}
+                    >
+                        <span>{initial}</span>
+                    </div>
+                </div>
+            );
+        }
+    };
+
     return (
-        <div className="mt-3">
+        <div className="mt-3 p-3">
             {chatLogs.map((chatLog, index) => {
                 const leftBubble = chatLog.chatUserId === chatUserId;
+                const previousMessageUserUnique =
+                    index === chatLogs.length - 1 || chatLog.chatUserId !== chatLogs[index + 1].chatUserId;
+                const bubbleOriginElement = previousMessageUserUnique
+                    ? `mb-4 bubble-origin-${leftBubble ? "left" : "right"}`
+                    : `mb-1`;
                 return (
-                    <div className="mb-3 chat-bubble-container" key={`${index}_${chatLog.chatUserId}`}>
-                        <div className={`mb-4 chat-bubble shadow bubble-origin-${leftBubble ? "left" : "right"}`}>
+                    <div className="mb-2 chat-bubble-container row" key={`${index}_${chatLog.chatUserId}`}>
+                        {addGutter(!leftBubble)}
+                        <div className={`col-md-10 col-sm-12 p-3 chat-bubble shadow ${bubbleOriginElement}`}>
                             {chatLog.chatLogContent}
                         </div>
-                        <div className={`d-flex justify-content-${leftBubble ? "start" : "end"}`}>
-                            <div className="shadow chat-bubble-user-icon d-flex align-items-center justify-content-center">
-                                <span>{chatLog.chatUserName[0]}</span>
-                            </div>
-                        </div>
+                        {addGutter(leftBubble)}
+                        {addUserIcon(previousMessageUserUnique, leftBubble, chatLog.chatUserName[0])}
                     </div>
                 );
             })}
+            <div ref={messagesEndRef} />
         </div>
     );
 };

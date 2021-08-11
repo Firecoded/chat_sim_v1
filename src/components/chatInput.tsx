@@ -17,13 +17,13 @@ export const ChatInput = ({ onSubmit }: IChatInputProps): JSX.Element => {
         >
             <div className="input-group">
                 <textarea
-                    className="form-control"
+                    className="form-control chat-input"
                     aria-label="Chat Text Area"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                 ></textarea>
                 <div className="input-group-append">
-                    <button className="input-group-text" type="submit">
+                    <button className="input-group-text chat-input-button px-3" type="submit">
                         Chat
                     </button>
                 </div>

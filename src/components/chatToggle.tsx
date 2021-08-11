@@ -6,11 +6,11 @@ export interface IChatToggleProps {
 
 export const ChatToggle = ({ toggleOptions, activeToggle, onToggleClick }: IChatToggleProps): JSX.Element => {
     return (
-        <div className="chat-toggle-container d-flex pt-2 px-2 rounded-corners-top">
+        <div className="chat-toggle-container d-flex rounded-corners-top">
             {toggleOptions.map((option, index) => {
                 return (
                     <div
-                        className={`w-50 d-flex justify-content-center align-items-center p-3  ${
+                        className={`w-50 d-flex justify-content-center align-items-center p-3 rounded-corners-top ${
                             activeToggle === index ? "active" : ""
                         }`}
                         key={index}
