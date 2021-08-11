@@ -1,7 +1,5 @@
 import { ChatSimContainer } from "./controllers/chatSimContainer";
 
-function App() {
+export const App = () => {
     return <ChatSimContainer />;
-}
-
-export default App;
+};
