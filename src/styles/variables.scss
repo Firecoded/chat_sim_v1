@@ -8,3 +8,17 @@ $orangeMid: #ca6702;
 $orangeLight: #bb3e03;
 $redDark: #ae2012;
 $redLight: #9b2226;
+
+$defaultRoundedCorners: 1rem;
+
+@mixin rounded-corners-all {
+    border-radius: $defaultRoundedCorners;
+}
+
+@mixin rounded-corners-top-left {
+    border-top-left-radius: $defaultRoundedCorners;
+}
+
+@mixin rounded-corners-top-right {
+    border-top-right-radius: $defaultRoundedCorners;
+}

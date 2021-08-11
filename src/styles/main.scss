@@ -8,5 +8,35 @@ body {
 
 #root {
     height: 100vh;
-    background-color: red;
+    background-color: $black;
+    padding: 3rem;
+}
+
+.chat-sim-container {
+    // max-width: 1200px;
+    background-color: $blueDark;
+}
+
+.chat-toggle-container {
+    background-color: $blueMid;
+    div {
+        @include rounded-corners-top-left;
+        @include rounded-corners-top-right;
+        border: 1px solid $black;
+        border-bottom: none;
+    }
+    .active {
+        background-color: $blueDark;
+    }
+}
+
+/* Util */
+
+.rounded-corners-all {
+    @include rounded-corners-all;
+}
+
+.rounded-corners-top {
+    @include rounded-corners-top-left;
+    @include rounded-corners-top-right;
 }
