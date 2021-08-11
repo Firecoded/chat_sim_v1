@@ -42,9 +42,9 @@ export const ChatBubbles = ({ chatUserId, chatLogs }: IChatBubblesProps): JSX.El
         <div className="mt-3 p-3">
             {chatLogs.map((chatLog, index) => {
                 const leftBubble = chatLog.chatUserId === chatUserId;
-                const previousMessageUserUnique =
+                const showUserIcon =
                     index === chatLogs.length - 1 || chatLog.chatUserId !== chatLogs[index + 1].chatUserId;
-                const bubbleOriginElement = previousMessageUserUnique
+                const bubbleOriginElement = showUserIcon
                     ? `mb-4 bubble-origin-${leftBubble ? "left" : "right"}`
                     : `mb-1`;
                 return (
@@ -54,7 +54,7 @@ export const ChatBubbles = ({ chatUserId, chatLogs }: IChatBubblesProps): JSX.El
                             {chatLog.chatLogContent}
                         </div>
                         {addGutter(leftBubble)}
-                        {addUserIcon(previousMessageUserUnique, leftBubble, chatLog.chatUserName[0])}
+                        {addUserIcon(showUserIcon, leftBubble, chatLog.chatUserName[0])}
                     </div>
                 );
             })}

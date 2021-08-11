@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 interface IChatInputProps {
-    temp?: string;
     onSubmit: (value: string) => void;
 }
 

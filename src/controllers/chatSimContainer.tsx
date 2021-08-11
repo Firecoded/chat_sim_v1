@@ -20,7 +20,7 @@ export const ChatSimContainer = (): JSX.Element => {
         {
             chatUserId: 0,
             chatUserName: "Jim",
-            chatLogContent: "Hey There!",
+            chatLogContent: "Hi Pam!",
         },
         {
             chatUserId: 1,
@@ -39,10 +39,6 @@ export const ChatSimContainer = (): JSX.Element => {
             chatUserName: "Pam",
         },
     ]);
-
-    const handleChatSubmit = (chatEntry: IChatLogEntry) => {
-        setChatLogs([...chatLogs, chatEntry]);
-    };
 
     return (
         <div className="shadow chat-sim-container container-fluid h-100 rounded-corners-all d-flex flex-column">
@@ -74,18 +70,14 @@ export const ChatSimContainer = (): JSX.Element => {
                 </div>
             </div>
             <div className="row">
-                <div
-                    className={`top-border right-border pb-2 col-md-6 col-sm-12 ${
-                        activeChatLog === 1 ? "d-none d-md-block" : ""
-                    }`}
-                >
+                <div className={`top-border pb-2 col-md-6 col-sm-12 ${activeChatLog === 1 ? "d-none d-md-block" : ""}`}>
                     <div className="chat-input-container p-3">
                         <ChatInput
                             onSubmit={(inputValue: string) => {
                                 if (inputValue === "") {
                                     return;
                                 }
-                                handleChatSubmit({ ...chatUsers[0], chatLogContent: inputValue });
+                                setChatLogs([...chatLogs, { ...chatUsers[0], chatLogContent: inputValue }]);
                             }}
                         />
                     </div>
@@ -97,7 +89,7 @@ export const ChatSimContainer = (): JSX.Element => {
                                 if (inputValue === "") {
                                     return;
                                 }
-                                handleChatSubmit({ ...chatUsers[1], chatLogContent: inputValue });
+                                setChatLogs([...chatLogs, { ...chatUsers[1], chatLogContent: inputValue }]);
                             }}
                         />
                     </div>
