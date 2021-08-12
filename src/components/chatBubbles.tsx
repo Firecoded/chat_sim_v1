@@ -1,11 +1,13 @@
 import { useRef, useEffect } from "react";
 import { IChatUser, IChatLogEntry } from "../controllers/chatSimContainer";
+import { IsTyping } from "./isTyping";
 
 interface IChatBubblesProps extends IChatUser {
     chatLogs: IChatLogEntry[];
+    otherUser: IChatUser;
 }
 
-export const ChatBubbles = ({ chatUserId, chatLogs }: IChatBubblesProps): JSX.Element => {
+export const ChatBubbles = ({ chatUserId, chatLogs, otherUser }: IChatBubblesProps): JSX.Element => {
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
@@ -16,7 +18,7 @@ export const ChatBubbles = ({ chatUserId, chatLogs }: IChatBubblesProps): JSX.El
 
     useEffect(() => {
         scrollToBottom();
-    }, [chatLogs]);
+    }, [chatLogs, otherUser.isTyping]);
 
     const addGutter = (addGutter: boolean) => {
         if (addGutter) {
@@ -40,6 +42,26 @@ export const ChatBubbles = ({ chatUserId, chatLogs }: IChatBubblesProps): JSX.El
         }
     };
 
+    const addIsTyping = () => {
+        if (otherUser.isTyping) {
+            return (
+                <div className="mb-2 chat-bubble-container row">
+                    <div className="col-12 d-flex justify-content-end">
+                        <div className="d-flex align-items-center justify-content-center">
+                            <IsTyping />
+                        </div>
+                        <div className="right-user-bubble shadow chat-bubble-user-icon d-flex align-items-center justify-content-center">
+                            <span>{otherUser.chatUserName[0]}</span>
+                        </div>
+                    </div>
+
+                    <div ref={messagesEndRef} />
+                </div>
+            );
+        }
+        return <div ref={messagesEndRef} />;
+    };
+
     return (
         <div className="mt-3 p-3">
             {chatLogs.map((chatLog, index) => {
@@ -60,7 +82,7 @@ export const ChatBubbles = ({ chatUserId, chatLogs }: IChatBubblesProps): JSX.El
                     </div>
                 );
             })}
-            <div ref={messagesEndRef} />
+            {addIsTyping()}
         </div>
     );
 };
