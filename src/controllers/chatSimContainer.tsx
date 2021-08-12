@@ -13,6 +13,7 @@ export interface IChatLogEntry {
 export interface IChatUser {
     chatUserId: number;
     chatUserName: string;
+    isTyping: boolean;
 }
 
 export const ChatSimContainer = (): JSX.Element => {
@@ -29,16 +30,29 @@ export const ChatSimContainer = (): JSX.Element => {
         },
     ]);
     const [activeChatLog, setActiveChatLog] = useState(0);
-    const chatUsers = [
+    const [chatUsers, setChatUsers] = useState<IChatUser[]>([
         {
             chatUserId: 0,
             chatUserName: "Jim",
+            isTyping: false,
         },
         {
             chatUserId: 1,
             chatUserName: "Pam",
+            isTyping: false,
         },
-    ];
+    ]);
+
+    const setUserIsTyping = (chatUserId: number, isTyping: boolean) => {
+        setChatUsers(
+            chatUsers.map((user, index) => {
+                if (user.chatUserId === chatUserId) {
+                    return { ...user, isTyping };
+                }
+                return { ...user };
+            })
+        );
+    };
 
     return (
         <div className="shadow chat-sim-container container-fluid h-100 rounded-corners-all d-flex flex-column">
@@ -57,14 +71,14 @@ export const ChatSimContainer = (): JSX.Element => {
                 >
                     <div className="chat-container d-flex flex-column h-100 p-2">
                         <div className="chat-logs flex-fill">
-                            <ChatBubbles chatLogs={chatLogs} {...chatUsers[0]} />
+                            <ChatBubbles chatLogs={chatLogs} {...chatUsers[0]} otherUser={chatUsers[1]} />
                         </div>
                     </div>
                 </div>
                 <div className={`mb-2 col-md-6 col-sm-12 ${activeChatLog === 0 ? "d-none d-md-block" : ""}`}>
                     <div className="chat-container d-flex flex-column h-100 p-2">
                         <div className="chat-logs flex-fill">
-                            <ChatBubbles chatLogs={chatLogs} {...chatUsers[1]} />
+                            <ChatBubbles chatLogs={chatLogs} {...chatUsers[1]} otherUser={chatUsers[0]} />
                         </div>
                     </div>
                 </div>
@@ -79,6 +93,8 @@ export const ChatSimContainer = (): JSX.Element => {
                                 }
                                 setChatLogs([...chatLogs, { ...chatUsers[0], chatLogContent: inputValue }]);
                             }}
+                            setUserIsTyping={(isTyping) => setUserIsTyping(0, isTyping)}
+                            userIsTyping={chatUsers[0].isTyping}
                         />
                     </div>
                 </div>
@@ -91,6 +107,8 @@ export const ChatSimContainer = (): JSX.Element => {
                                 }
                                 setChatLogs([...chatLogs, { ...chatUsers[1], chatLogContent: inputValue }]);
                             }}
+                            setUserIsTyping={(isTyping) => setUserIsTyping(1, isTyping)}
+                            userIsTyping={chatUsers[1].isTyping}
                         />
                     </div>
                 </div>

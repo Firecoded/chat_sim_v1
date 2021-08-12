@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface IChatInputProps {
     onSubmit: (value: string) => void;
+    setUserIsTyping: (isTyping: boolean) => void;
+    userIsTyping: boolean;
 }
 
-export const ChatInput = ({ onSubmit }: IChatInputProps): JSX.Element => {
+export const ChatInput = ({ onSubmit, setUserIsTyping, userIsTyping }: IChatInputProps): JSX.Element => {
     const [inputValue, setInputValue] = useState("");
+
+    useEffect(() => {
+        if (inputValue === "" && userIsTyping === true) {
+            setUserIsTyping(false);
+        } else if (inputValue !== "" && userIsTyping === false) {
+            setUserIsTyping(true);
+        }
+    }, [inputValue, setUserIsTyping, userIsTyping]);
+
     return (
         <form
             onSubmit={(e) => {

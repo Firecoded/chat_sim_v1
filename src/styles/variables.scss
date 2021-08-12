@@ -36,3 +36,9 @@ $defaultRoundedCorners: 1rem;
     -o-animation: appear 0.5s 1;
     animation: appear 0.5s 1;
 }
+
+@mixin anim-bounce {
+    -moz-animation: bounce 1.3s linear infinite;
+    -o-animation: bounce 1.3s linear infinite;
+    animation: bounce 1.3s linear infinite;
+}
