@@ -20,16 +20,10 @@ export const ChatBubbles = ({ chatUserId, chatLogs, otherUser }: IChatBubblesPro
         scrollToBottom();
     }, [chatLogs, otherUser.isTyping]);
 
-    const addGutter = (addGutter: boolean) => {
-        if (addGutter) {
-            return <div className="col-md-2 d-sm-none d-md-block"></div>;
-        }
-    };
-
     const addUserIcon = (addIcon: boolean, leftBubble: boolean, initial: string) => {
         if (addIcon) {
             return (
-                <div className={`col-12 d-flex justify-content-${leftBubble ? "start" : "end"}`}>
+                <div className={`col-12 d-flex justify-content-${leftBubble ? "start pl-0" : "end pr-0"}`}>
                     <div
                         className={`${
                             leftBubble ? "left" : "right"
@@ -46,12 +40,9 @@ export const ChatBubbles = ({ chatUserId, chatLogs, otherUser }: IChatBubblesPro
         if (otherUser.isTyping) {
             return (
                 <div className="mb-2 chat-bubble-container row">
-                    <div className="col-12 d-flex justify-content-end">
+                    <div className="col-12 d-flex justify-content-end pr-0">
                         <div className="d-flex align-items-center justify-content-center">
                             <IsTyping />
-                        </div>
-                        <div className="right-user-bubble shadow chat-bubble-user-icon d-flex align-items-center justify-content-center">
-                            <span>{otherUser.chatUserName[0]}</span>
                         </div>
                     </div>
 
@@ -65,20 +56,18 @@ export const ChatBubbles = ({ chatUserId, chatLogs, otherUser }: IChatBubblesPro
     return (
         <div className="mt-3 p-3">
             {chatLogs.map((chatLog, index) => {
-                const leftBubble = chatLog.chatUserId === chatUserId;
+                const isLeft = chatLog.chatUserId === chatUserId;
                 const showUserIcon =
                     index === chatLogs.length - 1 || chatLog.chatUserId !== chatLogs[index + 1].chatUserId;
-                const bubbleOriginElement = showUserIcon
-                    ? `mb-4 bubble-origin-${leftBubble ? "left" : "right"}`
-                    : `mb-1`;
+                const bubbleOriginElement = showUserIcon ? `mb-1 bubble-origin-${isLeft ? "left" : "right"}` : `mb-1`;
                 return (
                     <div className="mb-2 chat-bubble-container row" key={`${index}_${chatLog.chatUserId}`}>
-                        {addGutter(!leftBubble)}
-                        <div className={`col-md-10 col-sm-12 p-3 chat-bubble shadow ${bubbleOriginElement}`}>
-                            {chatLog.chatLogContent}
+                        <div className={`d-flex justify-content-${isLeft ? "start " : "end "}w-100 px-3`}>
+                            <span className={`p-3 chat-bubble shadow ${bubbleOriginElement}`}>
+                                {chatLog.chatLogContent}
+                            </span>
                         </div>
-                        {addGutter(leftBubble)}
-                        {addUserIcon(showUserIcon, leftBubble, chatLog.chatUserName[0])}
+                        {addUserIcon(showUserIcon, isLeft, chatLog.chatUserName[0])}
                     </div>
                 );
             })}

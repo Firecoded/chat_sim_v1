@@ -1,11 +1,15 @@
 $color-theme: (
-    "primary": #76323f,
-    "accent": #d98328,
-    "accent-variant": #c09f80,
-    "secondary": #5a1321,
-    "success": #6ac58a,
-    "foreground": #565656,
-    "background": #d7cec7,
+    "primary": rgb(53, 58, 186),
+    "primary-variant": rgb(43, 161, 253),
+    "secondary": rgba(53, 58, 186, 0.5),
+    "secondary-variant": rgba(43, 161, 253, 0.3),
+    "success": rgb(120, 192, 67),
+    "danger": rgb(237, 28, 58),
+    "background1": #ffffff,
+    "background2": rgb(221, 221, 221),
+    "background3": rgb(129, 138, 145),
+    "background4": rgba(53, 58, 186, 0.1),
+    "background5": rgb(94, 104, 112),
 );
 
 @function get-color($key: "primary") {
