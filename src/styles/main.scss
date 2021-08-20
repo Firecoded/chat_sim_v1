@@ -8,25 +8,30 @@ body {
 
 #root {
     height: 100vh;
-    background-color: get-color("foreground");
+    background-color: get-color("background3");
     padding: 3rem;
 }
 
 .chat-sim-container {
     max-width: 1800px;
-    background-color: get-color("background");
+    background-color: get-color("background5");
+    border-radius: 0.5rem;
 }
 
 .chat-toggle-container {
-    background-color: get-color("foreground");
+    background: get-color("background3");
     div {
-        background-color: get-color("accent-variant");
-        @include black-text;
+        background: get-color("primary-variant");
+        @include white-text;
+        border: 1px solid get-color("secondary");
+        border-bottom: none;
     }
     .active {
-        background-color: get-color("background");
+        background: get-color("background5");
         border-bottom: none;
         text-decoration: underline;
+        border: 1px solid get-color("primary-variant");
+        border-bottom: none;
     }
 }
 
@@ -34,28 +39,29 @@ body {
     @include anim-appear;
     .chat-bubble {
         position: relative;
-        background: get-color("accent-variant");
+        background: get-color("background2");
         @include rounded-corners-all;
         @include black-text;
         text-align: center;
+        min-width: 100px;
         &.bubble-origin-left:before,
         &.bubble-origin-right:before {
             content: "";
             width: 0px;
             height: 0px;
             position: absolute;
-            border-left: 12px solid get-color("accent-variant");
-            border-right: 6px solid transparent;
-            border-top: 6px solid get-color("accent-variant");
-            border-bottom: 10px solid transparent;
-            left: 32px;
-            bottom: -16px;
+            border-left: 10px solid get-color("background2");
+            border-right: 5px solid transparent;
+            border-top: 5px solid get-color("background2");
+            border-bottom: 8px solid transparent;
+            left: 22px;
+            bottom: -13px;
         }
         &.bubble-origin-right:before {
-            border-right: 12px solid get-color("accent-variant");
+            border-right: 10px solid get-color("background2");
             border-left: 6px solid transparent;
             left: initial;
-            right: 32px;
+            right: 22px;
         }
     }
     .chat-bubble-user-icon {
@@ -67,22 +73,23 @@ body {
             @include white-text;
         }
         &.right-user-bubble {
-            background-color: get-color("secondary");
+            background-color: get-color("primary-variant");
             @include white-text;
         }
     }
 }
 
 .chat-input {
-    background-color: get-color("accent-variant");
+    background: get-color("background2");
     resize: none;
     &:focus {
-        background-color: get-color("accent-variant");
+        background: get-color("background2");
     }
 }
 
 .chat-input-button {
-    background-color: get-color("success");
+    background-color: get-color("secondary-variant");
+    @include white-text;
 }
 
 .is-typing {
@@ -92,7 +99,7 @@ body {
         height: 8px;
         border-radius: 50%;
         margin-right: 2px;
-        background-color: get-color("secondary");
+        background-color: get-color("primary-variant");
         @include anim-bounce;
         &:nth-child(2) {
             animation-delay: -1.1s;

@@ -25,16 +25,16 @@ export const ChatInput = ({ onSubmit, setUserIsTyping, userIsTyping }: IChatInpu
                 setInputValue("");
             }}
         >
-            <div className="input-group">
-                <textarea
+            <div className="input-group shadow">
+                <input
                     className="form-control chat-input"
-                    aria-label="Chat Text Area"
+                    aria-label="Chat Input"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
-                ></textarea>
+                ></input>
                 <div className="input-group-append">
                     <button className="input-group-text chat-input-button px-3" type="submit">
-                        Chat
+                        Send
                     </button>
                 </div>
             </div>

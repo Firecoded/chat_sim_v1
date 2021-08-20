@@ -55,7 +55,7 @@ export const ChatSimContainer = (): JSX.Element => {
     };
 
     return (
-        <div className="shadow chat-sim-container container-fluid h-100 rounded-corners-all d-flex flex-column">
+        <div className="chat-sim-container container-fluid h-100 d-flex flex-column">
             <div className="row d-md-none">
                 <div className="col-12 p-0">
                     <ChatToggle
